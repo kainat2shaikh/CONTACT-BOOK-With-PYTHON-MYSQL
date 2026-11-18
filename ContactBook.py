@@ -1,4 +1,4 @@
-orimport mysql.connector
+import mysql.connector
 from prettytable import PrettyTable
 import re
 
