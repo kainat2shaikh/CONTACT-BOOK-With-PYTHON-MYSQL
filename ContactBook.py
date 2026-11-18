@@ -1,4 +1,4 @@
-import mysql.connector
+orimport mysql.connector
 from prettytable import PrettyTable
 import re
 
@@ -52,7 +52,7 @@ def add_contact():
                     if mobile.isdigit() and len(mobile)==10:
                         return f"(+91){mobile}"    
                     else:
-                        print("Enter Valid 10-Digit Mobile Number.")
+                        print("Error! Enter Valid 10-Digit Mobile Number.")
                         continue
                         
 
@@ -136,7 +136,7 @@ def search_contact():
 
     try:
             if not user:
-                print("Search Field Cannot Be Empty!! Type Proper Name Or Number.")
+                print("Search Field Cannot Be Empty! Type Proper Name Or Number.")
                 return
             else:
                 cursor.execute('select * from contactbook where LOWER(name) like LOWER(%s) or mob like %s',(f'%{user}%',f'%{user}%'))
@@ -208,7 +208,7 @@ def del_contact():
         table.add_row([target_id[0],target_id[1],target_id[2],target_id[3] or '-',target_id[4] or 'N/A',target_id[5]])
         print(table)
 
-        confirmed=input(f'Are You Sure? Type "Yes" To Confirm, "No" To Cancel. ').strip()
+        confirmed=input(f'Are You Sure? Type "Yes" To Confirm, "No" To Cancel: ').strip()
         if confirmed.lower()==('Yes').lower():
             try:
                 query='delete from contactbook where id = %s ;'
@@ -256,7 +256,7 @@ def del_contact():
                 table.add_row([i[0],i[1],i[2],i[3] or '-',i[4] or 'N/A',i[5]])
             print(table)
                         
-            all_confirmation=input("Type 'Confirm' To Confirm, 'Cancel' To Cancel.").strip().lower()
+            all_confirmation=input("Type 'Confirm' To Confirm, 'Cancel' To Cancel: ").strip().lower()
             if not all_confirmation:
                 print("Empty Input Doesn't Work!!")
                 return
@@ -290,7 +290,7 @@ def del_contact():
                     
         try:
             if not choice:
-                print("Empty Command Found!! Choose any one Option For Deletion.")
+                print("Empty Command Found!! Choose any one Option.")
                 continue
                     
             ch=int(choice)
@@ -335,14 +335,14 @@ def upd_contact():
         return
                 
     table.clear()
-    print (f"Updating ({enter_id}'s) Details Below .")
+    print (f"Updating Below Given ({enter_id}'s) Details.")
     table.field_names=['ID','Name','Mobile Number','Email','City','Created At']
     for i in upd_info:
         table.add_row([i[0],i[1],i[2],i[3] or '-',i[4] or 'N/A',i[5]])
     print(table)
 
     if (len(upd_info))>1:
-        print(f"\n Multiple Contacts Found For '{enter_id}'! Enter Exact ID To Update The Specific Contact. ")
+        print(f"\n Multiple Contacts Found For '{enter_id}'! Enter Exact ID To Update The Specific Contact: ")
         check_id=input("Enter Exact ID (Or Press 'Enter' To Skip): ")or None
         if not check_id:
             print("Skipped Updation")
@@ -364,7 +364,7 @@ def upd_contact():
 
         print("\nWhat do you want to Update: ")
         print("1. Name.\n2. Mobile Number.\n3. Email.\n4. City.\n5. Exit\n")
-        choice=(input("Enter your choice:")).strip()
+        choice=(input("Enter your choice: ")).strip()
         if not choice:
             print("Command Not Found!")
             continue
